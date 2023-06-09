@@ -1,3 +1,4 @@
 /*
-/*/
-!/app/code/
+!/app
+/app/*
+!/app/code
