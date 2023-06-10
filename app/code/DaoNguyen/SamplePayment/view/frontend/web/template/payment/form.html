@@ -10,7 +10,33 @@
     </div>
 
     <div class="payment-method-content">
-        <p>Hello World</p>
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <form method="post" action="https://adobe-commerce-246.docker/payment/emulator" id="zeus_payment_form">
+            <input data-bind='attr: {value: window.checkoutConfig.formKey}' type="hidden" name="form_key">
+            <input type="hidden" name="clientip" value="**********" />
+            <input type="hidden" name="money" value="8000"/>
+            <input type="hidden" name="sendid" value="CARD0001"/>
+            <input type="hidden" name="sendpoint" value="TEST123"/>
+            <input type="hidden" name="telno" value="0334989030"/>
+            <input type="hidden" name="email" value="example@cardservice.co.jp"/>
+            <input type="hidden" name="success_url" value="https://www.cardservice.co.jp/1"/>
+            <input type="hidden" name="success_str" value="Top Page 1"/>
+            <input type="hidden" name="failure_url" value="https://www.cardservice.co.jp/2"/>
+            <input type="hidden" name="failure_str" value="Top page 2"/>
+            <input type="submit" value="To credit card payment page" disabled/>
+        </form>
         <div class="actions-toolbar">
             <div class="primary">
                 <button class="action primary checkout"
